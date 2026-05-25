@@ -16,7 +16,6 @@
 
 import { Show, createSignal, onMount, onCleanup, createMemo } from "solid-js";
 import { useAuth } from "~/lib/auth";
-import { useAdminAuth } from "~/lib/admin";
 import { db } from "~/lib/firebase";
 import { doc, onSnapshot, type FirestoreError } from "firebase/firestore";
 import ProfileHeader from "~/components/profile/ProfileHeader";
@@ -66,7 +65,6 @@ interface VibeData {
 
 export default function Profile() {
   const { user } = useAuth();
-  const { isAdmin } = useAdminAuth(user()?.uid);
   const [profileData, setProfileData] = createSignal<ProfileData | null>(null);
   const [loading, setLoading] = createSignal(true);
   const [error, setError] = createSignal<string | null>(null);
@@ -150,7 +148,7 @@ export default function Profile() {
 
       {/* Main Content Area - matches homepage layout */}
       <main class="flex-1 w-full min-w-0 pb-32 lg:pb-12 z-10 relative">
-        <ProfileHeader title="My Profile" showActions={true} isAdmin={isAdmin()} isHost={profileData()?.isHost} />
+        <ProfileHeader title="My Profile" showActions={true} isAdmin={false} isHost={profileData()?.isHost} />
 
         <div class="min-h-screen bg-[#F0F4F8] dark:bg-black pb-4 relative overflow-hidden">
           {/* Error Toast */}

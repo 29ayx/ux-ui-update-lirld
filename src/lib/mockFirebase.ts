@@ -34,8 +34,60 @@ class MockDb {
   getCollection(colName: string) {
     if (colName === "plan") return this.data.plans || [];
     if (colName === "users") return Object.values(this.data.users || {});
-    if (colName === "callLogs") return this.data.callLogs || [];
-    if (colName === "profileViews") return this.data.profileViews || [];
+    if (colName === "calls") return Object.values(this.data.calls || {});
+    if (colName === "chats") {
+      const list = Object.values(this.data.chats || {});
+      return list.map((chat: any) => ({
+        participants: ["current-user", chat.otherUserId],
+        ...chat
+      }));
+    }
+    if (colName.startsWith("chats/") && colName.endsWith("/messages")) {
+      const chatId = colName.split("/")[1];
+      const list = this.data.messages?.[chatId] || [];
+      return list.map((msg: any) => ({
+        ...msg,
+        timestamp: new Timestamp(Math.floor(msg.timestamp / 1000), 0)
+      }));
+    }
+    if (colName === "callLogs" || (colName.startsWith("callLogs/") && colName.endsWith("/logs"))) {
+      const list = this.data.callLogs || [];
+      return list.map((log: any) => ({
+        ...log,
+        timestamp: new Timestamp(Math.floor(log.timestamp / 1000), 0)
+      }));
+    }
+    if (colName.startsWith("profileViews/") && colName.endsWith("/viewers")) {
+      const views = this.data.profileViews || [];
+      return views
+        .filter((v: any) => v.type === "incoming")
+        .map((v: any) => {
+          const u = this.data.users[v.userId] || {};
+          return {
+            id: v.id,
+            viewerId: v.userId,
+            viewerName: u.name || "Elena Rostova ✨",
+            viewerPhoto: u.photos?.[0] || "",
+            viewCount: 1,
+            lastViewedAt: new Timestamp(Math.floor(v.timestamp / 1000), 0)
+          };
+        });
+    }
+    if (colName.startsWith("profileViews/") && colName.endsWith("/viewed")) {
+      const views = this.data.profileViews || [];
+      return views
+        .filter((v: any) => v.type === "outgoing")
+        .map((v: any) => {
+          const u = this.data.users[v.userId] || {};
+          return {
+            id: v.id,
+            viewedUserId: v.userId,
+            viewedUserName: u.name || "Sophia Martinez 🌸",
+            viewedUserPhoto: u.photos?.[0] || "",
+            lastViewedAt: new Timestamp(Math.floor(v.timestamp / 1000), 0)
+          };
+        });
+    }
     return [];
   }
 
@@ -49,11 +101,15 @@ class MockDb {
     if (colName === "chats") {
       return this.data.chats?.[docId] || null;
     }
-    if (colName === "messages") {
-      return this.data.messages?.[docId] || null;
-    }
     if (colName === "calls") {
       return this.data.calls?.[docId] || null;
+    }
+    if (colName === "messages") {
+      for (const msgs of Object.values(this.data.messages || {})) {
+        const found = (msgs as any[]).find((m: any) => m.id === docId);
+        if (found) return found;
+      }
+      return null;
     }
     return null;
   }
@@ -135,38 +191,58 @@ class MockDb {
 
   addDocument(colName: string, docData: any) {
     const docId = Math.random().toString(36).substring(2, 11);
+    
+    // Normalize timestamps for JSON storage
+    const normalizedData = { ...docData };
+    for (const key of ["timestamp", "lastViewedAt", "appliedAt", "lastSeen", "createdAt"]) {
+      if (normalizedData[key]) {
+        if (typeof normalizedData[key].toMillis === "function") {
+          normalizedData[key] = normalizedData[key].toMillis();
+        } else if (typeof normalizedData[key].toDate === "function") {
+          normalizedData[key] = normalizedData[key].toDate().getTime();
+        } else if (normalizedData[key].seconds) {
+          normalizedData[key] = normalizedData[key].seconds * 1000;
+        } else if (normalizedData[key] instanceof Date) {
+          normalizedData[key] = normalizedData[key].getTime();
+        }
+      }
+    }
+
     if (colName === "plan") {
       if (!this.data.plans) this.data.plans = [];
-      const newPlan = { ...docData, id: docId };
+      const newPlan = { ...normalizedData, id: docId };
       this.data.plans.push(newPlan);
       this.save();
       this.triggerListeners(colName, "");
       return docId;
     }
-    if (colName === "callLogs") {
+    if (colName === "callLogs" || colName.endsWith("/logs")) {
       if (!this.data.callLogs) this.data.callLogs = [];
-      const newLog = { ...docData, id: docId };
+      const newLog = { ...normalizedData, id: docId };
       this.data.callLogs.push(newLog);
       this.save();
+      this.triggerListeners("callLogs", "");
       this.triggerListeners(colName, "");
       return docId;
     }
-    if (colName === "profileViews") {
+    if (colName === "profileViews" || colName.endsWith("/viewers") || colName.endsWith("/viewed")) {
       if (!this.data.profileViews) this.data.profileViews = [];
-      const newView = { ...docData, id: docId };
+      const newView = { ...normalizedData, id: docId };
       this.data.profileViews.push(newView);
       this.save();
+      this.triggerListeners("profileViews", "");
       this.triggerListeners(colName, "");
       return docId;
     }
-    if (colName.startsWith("messages/")) {
+    if (colName.startsWith("chats/") && colName.endsWith("/messages")) {
       const chatId = colName.split("/")[1];
       if (!this.data.messages) this.data.messages = {};
       if (!this.data.messages[chatId]) this.data.messages[chatId] = [];
-      const newMsg = { ...docData, id: docId };
+      const newMsg = { ...normalizedData, id: docId };
       this.data.messages[chatId].push(newMsg);
       this.save();
       this.triggerListeners("messages", chatId);
+      this.triggerListeners(colName, "");
       return docId;
     }
     return docId;
@@ -224,11 +300,12 @@ class MockDb {
 
   private triggerListenerForKey(key: string, callback: (snapshot: any) => void) {
     const parts = key.split("/");
-    const colName = parts[0];
-    const docId = parts[1];
+    const isDocument = parts.length % 2 === 0;
 
-    if (docId) {
+    if (isDocument) {
       // Document Snapshot Mock
+      const colName = parts[parts.length - 2];
+      const docId = parts[parts.length - 1];
       const data = this.getDocument(colName, docId);
       callback({
         exists: () => data !== null,
@@ -237,7 +314,7 @@ class MockDb {
       });
     } else {
       // Query / Collection Snapshot Mock
-      const list = this.getCollection(colName);
+      const list = this.getCollection(key);
       callback({
         docs: list.map((item: any) => ({
           id: item.id || item.uid,
@@ -250,7 +327,8 @@ class MockDb {
               data: () => item,
             });
           });
-        }
+        },
+        docChanges: () => []
       });
     }
   }

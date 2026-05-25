@@ -20,15 +20,7 @@ export default function ProfileHeader(props: ProfileHeaderProps) {
         <div class="flex flex-1 items-center justify-end gap-3">
           <Show when={props.showActions}>
             <div class="flex items-center gap-2">
-              <Show when={props.isAdmin}>
-                <A
-                  href="/admin/users"
-                  class="p-2 text-gray-500 hover:text-gray-900 dark:text-zinc-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-xl transition-all"
-                  title="Admin Panel"
-                >
-                  <AiOutlineHeatMap class="w-5 h-5" />
-                </A>
-              </Show>
+
               <Show when={props.isHost}>
                 <A
                   href="/host/settings"

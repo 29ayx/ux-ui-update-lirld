@@ -89,10 +89,7 @@ function RootLayout(props: { children?: any }) {
     return path === "/profile/edit";
   });
 
-  const isAdminPage = createMemo(() => {
-    const path = location.pathname;
-    return path === "/admin";
-  });
+
 
   const isV2Page = createMemo(() => {
     const path = location.pathname;
@@ -128,7 +125,7 @@ function RootLayout(props: { children?: any }) {
 
                   {/* Main layout with responsive navigation */}
                   <Show
-                    when={!isChatDetailPage() && !isEditPage() && !isAdminPage() && !isV2Page()}
+                    when={!isChatDetailPage() && !isEditPage() && !isV2Page()}
                     fallback={
                       <div class={isChatDetailPage() || isV2Page() ? "" : "pb-1"}>
                         <Suspense>{props.children}</Suspense>

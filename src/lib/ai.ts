@@ -1,4 +1,12 @@
-import { AdminUserData } from "./admin";
+export interface AdminUserData {
+  id?: string;
+  name?: string;
+  isAI?: boolean;
+  aiPersona?: string;
+  aiTone?: string;
+  aiModel?: string;
+  [key: string]: any;
+}
 
 /**
  * Interface for AI Response

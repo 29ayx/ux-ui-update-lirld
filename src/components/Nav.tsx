@@ -26,8 +26,6 @@ import { BsChatDots } from "solid-icons/bs";
 import { HiSolidPhone } from "solid-icons/hi";
 import { useHapticFeedback } from "~/hooks/useHapticFeedback";
 import DynamicIsland from "./DynamicIsland";
-import { useAdminAuth } from "~/lib/admin";
-import { AiOutlineHeatMap } from "solid-icons/ai";
 import { openProfile } from "~/lib/profileStore";
 
 export default function Nav() {
@@ -59,8 +57,6 @@ export default function Nav() {
   const [isTouching, setIsTouching] = createSignal(false);
   const [touchY, setTouchY] = createSignal(0);
   const [hoveredIndex, setHoveredIndex] = createSignal<number | null>(null);
-  const { isAdmin } = useAdminAuth(user()?.uid);
-
   // Navigation items
   const navItems = createMemo(() => {
     const items = [
@@ -76,15 +72,6 @@ export default function Nav() {
       { path: "/call-logs", icon: HiSolidPhone, label: "Calls", index: 4 },
       { path: "/profile", icon: OcPerson2, label: "Profile", index: 5 },
     ];
-
-    if (isAdmin()) {
-      items.push({
-        path: "/admin/users",
-        icon: AiOutlineHeatMap,
-        label: "Admin",
-        index: items.length,
-      });
-    }
 
     return items;
   });

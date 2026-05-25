@@ -198,6 +198,7 @@
     "chat_user3": {
       "id": "chat_user3",
       "otherUserId": "user3",
+      "participants": ["current-user", "user3"],
       "lastMessage": "Hey! How do you like the new UI designs?",
       "lastMessageTime": 1779836000000,
       "unreadCount": 1

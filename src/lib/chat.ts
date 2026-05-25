@@ -17,7 +17,7 @@ import {
   deleteDoc
 } from "firebase/firestore";
 import { aiService } from "./ai";
-import { AdminUserData } from "./admin";
+import { AdminUserData } from "./ai";
 
 export interface Message {
   id: string;

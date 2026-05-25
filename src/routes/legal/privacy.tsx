@@ -5,17 +5,21 @@ export default function PrivacyPolicy() {
   const [content, setContent] = createSignal<string>("");
   const [loading, setLoading] = createSignal(true);
 
-  onMount(async () => {
-    try {
-      const response = await fetch("/legal/privacy-policy.md");
-      const text = await response.text();
-      setContent(text);
-    } catch (error) {
-      console.error("Failed to load privacy policy:", error);
-      setContent("# Error\n\nFailed to load Privacy Policy. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
+  onMount(() => {
+    setContent(`# Privacy Policy
+
+Welcome to Lirld's Privacy Policy. This document explains how we collect, protect, and use your personal data.
+
+## 1. Information Collection
+We collect minimal mock user profiles, photos, and chat logs stored locally to demonstrate our UI layout and animations.
+
+## 2. Information Sharing
+Your data is stored entirely in your local browser storage and is not shared with any external databases or APIs.
+
+## 3. Contact Us
+For questions, contact the support team.
+`);
+    setLoading(false);
   });
 
   // Simple markdown to HTML converter for basic formatting

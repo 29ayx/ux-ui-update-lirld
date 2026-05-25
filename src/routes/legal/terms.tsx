@@ -5,17 +5,21 @@ export default function TermsOfService() {
   const [content, setContent] = createSignal<string>("");
   const [loading, setLoading] = createSignal(true);
 
-  onMount(async () => {
-    try {
-      const response = await fetch("/legal/terms-of-service.md");
-      const text = await response.text();
-      setContent(text);
-    } catch (error) {
-      console.error("Failed to load terms of service:", error);
-      setContent("# Error\n\nFailed to load Terms of Service. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
+  onMount(() => {
+    setContent(`# Terms of Service
+
+Please read these Terms of Service carefully before using our Lirld mockup interface.
+
+## 1. Acceptable Use
+You agree to use this mockup only for design evaluations and client reviews.
+
+## 2. Intellectual Property
+All UI elements, custom animations, and layout themes are protected under copyright.
+
+## 3. Disclaimers
+This is a local mockup sandbox client with no real live communication APIs.
+`);
+    setLoading(false);
   });
 
   // Simple markdown to HTML converter for basic formatting

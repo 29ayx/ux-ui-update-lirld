@@ -1,0 +1,261 @@
+{
+  "users": {
+    "current-user": {
+      "uid": "current-user",
+      "name": "Guest Explorer",
+      "age": 26,
+      "gender": "male",
+      "bio": "Just looking around for cool designs and interesting people! ✨",
+      "country": "United States",
+      "language": "English, Spanish",
+      "photos": [
+        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=300&q=80"
+      ],
+      "coins": 350,
+      "profileCompleted": true,
+      "vip": false,
+      "isOnline": true,
+      "lastSeen": 1779836400000,
+      "forcedOnline": true
+    },
+    "user1": {
+      "uid": "user1",
+      "name": "Elena Rostova ✨",
+      "age": 24,
+      "gender": "female",
+      "bio": "Lover of art, traveling, and deep late-night conversations. Coffee addict ☕️",
+      "country": "Germany",
+      "language": "German, English",
+      "photos": [
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80",
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=80"
+      ],
+      "vip": true,
+      "isOnline": true,
+      "lastSeen": 1779836400000,
+      "forcedOnline": true,
+      "isHost": true,
+      "pricePerMinute": 10,
+      "chattedWith": []
+    },
+    "user2": {
+      "uid": "user2",
+      "name": "Kenji Sato",
+      "age": 28,
+      "gender": "male",
+      "bio": "Exploring photography, coding, and dynamic animations. Tokyo vibes.",
+      "country": "Japan",
+      "language": "Japanese, English",
+      "photos": [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
+      ],
+      "vip": false,
+      "isOnline": false,
+      "lastSeen": 1779835400000,
+      "chattedWith": []
+    },
+    "user3": {
+      "uid": "user3",
+      "name": "Sophia Martinez 🌸",
+      "age": 22,
+      "gender": "female",
+      "bio": "UI/UX designer who loves bright colors, modern web setups, and coding in SolidJS.",
+      "country": "Spain",
+      "language": "Spanish, English",
+      "photos": [
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80"
+      ],
+      "vip": true,
+      "isOnline": true,
+      "lastSeen": 1779836400000,
+      "isHost": true,
+      "pricePerMinute": 15,
+      "chattedWith": ["current-user"]
+    },
+    "user4": {
+      "uid": "user4",
+      "name": "Carlos Silva",
+      "age": 27,
+      "gender": "male",
+      "bio": "Music producer, beach runner, and sunny lifestyle appreciator.",
+      "country": "Brazil",
+      "language": "Portuguese, English",
+      "photos": [
+        "https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=300&q=80"
+      ],
+      "vip": false,
+      "isOnline": true,
+      "lastSeen": 1779836400000,
+      "chattedWith": []
+    },
+    "user5": {
+      "uid": "user5",
+      "name": "Chloe Dupont 🦋",
+      "age": 25,
+      "gender": "female",
+      "bio": "Croissant & Wine enthusiast. Let's practice language exchange!",
+      "country": "France",
+      "language": "French, English",
+      "photos": [
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+      ],
+      "vip": false,
+      "isOnline": false,
+      "lastSeen": 1779832000000,
+      "chattedWith": []
+    },
+    "user6": {
+      "uid": "user6",
+      "name": "Rohan Gupta",
+      "age": 29,
+      "gender": "male",
+      "bio": "Web developer and design enthusiast who loves exploring UI libraries.",
+      "country": "India",
+      "language": "Hindi, English",
+      "photos": [
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80"
+      ],
+      "vip": true,
+      "isOnline": true,
+      "lastSeen": 1779836400000,
+      "chattedWith": []
+    }
+  },
+  "plans": [
+    {
+      "id": "plan1",
+      "items": "100 Coins Starter Pack",
+      "coins": 100,
+      "price": 1.99
+    },
+    {
+      "id": "plan2",
+      "items": "350 Coins Standard Value",
+      "coins": 350,
+      "price": 4.99
+    },
+    {
+      "id": "plan3",
+      "items": "1000 Coins Premium Pack",
+      "coins": 1000,
+      "price": 12.99
+    },
+    {
+      "id": "plan4",
+      "items": "2500 Coins VIP Special",
+      "coins": 2500,
+      "price": 24.99
+    }
+  ],
+  "marketing": {
+    "banner_home": {
+      "bg_img": "https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=800&q=80",
+      "content": "Welcome to Lirld Local Dummy! Share this UI/UX review with your clients.",
+      "img": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=150&q=80",
+      "title": "Interactive Client Review Mode Enabled",
+      "bg_color": "#1e1b4b",
+      "title_color": "#a5b4fc",
+      "content_color": "#e0e7ff",
+      "bg_opacity": 0.4,
+      "active": true
+    },
+    "banner_promotion": {
+      "bg_img": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+      "content": "Get premium VIP benefits, custom banners, priority feeds and much more.",
+      "img": "",
+      "title": "Upgrade to VIP Status",
+      "bg_color": "#3b0764",
+      "title_color": "#f3e8ff",
+      "content_color": "#e9d5ff",
+      "bg_opacity": 0.3,
+      "active": true
+    },
+    "plans_banner": {
+      "bg_img": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80",
+      "content": "Purchase coins safely with our secure mock billing simulator. All actions are simulated.",
+      "img": "",
+      "title": "Offline Sandbox Mode",
+      "bg_color": "#1c1917",
+      "title_color": "#f5f5f4",
+      "content_color": "#d6d3d1",
+      "bg_opacity": 0.4,
+      "active": true
+    },
+    "banner_explore": {
+      "bg_img": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+      "content": "Filter users by location, gender, host status, and age completely offline.",
+      "img": "",
+      "title": "Explore Profiles Locally",
+      "bg_color": "#062f4f",
+      "title_color": "#bfe3b4",
+      "content_color": "#ddf2d1",
+      "bg_opacity": 0.5,
+      "active": true
+    }
+  },
+  "chats": {
+    "chat_user3": {
+      "id": "chat_user3",
+      "otherUserId": "user3",
+      "lastMessage": "Hey! How do you like the new UI designs?",
+      "lastMessageTime": 1779836000000,
+      "unreadCount": 1
+    }
+  },
+  "messages": {
+    "chat_user3": [
+      {
+        "id": "msg1",
+        "senderId": "user3",
+        "text": "Hi there! Welcome to Lirld! 😊",
+        "timestamp": 1779835800000
+      },
+      {
+        "id": "msg2",
+        "senderId": "current-user",
+        "text": "Hey Sophia! The interface looks stunning!",
+        "timestamp": 1779835900000
+      },
+      {
+        "id": "msg3",
+        "senderId": "user3",
+        "text": "Hey! How do you like the new UI designs?",
+        "timestamp": 1779836000000
+      }
+    ]
+  },
+  "calls": {},
+  "callLogs": [
+    {
+      "id": "log1",
+      "otherUserId": "user1",
+      "type": "incoming",
+      "status": "missed",
+      "timestamp": 1779834000000,
+      "duration": 0
+    },
+    {
+      "id": "log2",
+      "otherUserId": "user3",
+      "type": "outgoing",
+      "status": "completed",
+      "timestamp": 1779832000000,
+      "duration": 120
+    }
+  ],
+  "profileViews": [
+    {
+      "id": "view1",
+      "userId": "user1",
+      "timestamp": 1779835000000,
+      "type": "incoming"
+    },
+    {
+      "id": "view2",
+      "userId": "user3",
+      "timestamp": 1779834500000,
+      "type": "outgoing"
+    }
+  ]
+}

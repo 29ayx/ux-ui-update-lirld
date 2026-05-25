@@ -1,0 +1,192 @@
+import { createSignal, onMount, onCleanup, Show } from "solid-js";
+
+type IslandState = {
+  type: "call" | "message" | "notification" | "music";
+  color: string;
+  textColor: string;
+  icon: () => any;
+  line1: string;
+  line2: string;
+};
+
+const states: IslandState[] = [
+  {
+    type: "call",
+    color: "#932F67",
+    textColor: "#FFFFFF",
+    icon: () => (
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+      </svg>
+    ),
+    line1: "Call",
+    line2: "12:34"
+  },
+  {
+    type: "message",
+    color: "#D92C54",
+    textColor: "#FFFFFF",
+    icon: () => (
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+      </svg>
+    ),
+    line1: "New",
+    line2: "Msg"
+  },
+  {
+    type: "notification",
+    color: "#DDDEAB",
+    textColor: "#2D2D2D",
+    icon: () => (
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+      </svg>
+    ),
+    line1: "Match",
+    line2: "Found"
+  },
+  {
+    type: "music",
+    color: "#8ABB6C",
+    textColor: "#FFFFFF",
+    icon: () => (
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+      </svg>
+    ),
+    line1: "Now",
+    line2: "Play"
+  }
+];
+
+interface DynamicIslandProps {
+  totalUnreadCount?: number;
+  isPublicProfile?: boolean;
+}
+
+export default function DynamicIsland(props: DynamicIslandProps) {
+  const [currentIndex, setCurrentIndex] = createSignal(0);
+  const [isAnimating, setIsAnimating] = createSignal(false);
+
+  let intervalId: number;
+
+  onMount(() => {
+    intervalId = window.setInterval(() => {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % states.length);
+        setIsAnimating(false);
+      }, 300);
+    }, 2000);
+  });
+
+  onCleanup(() => {
+    if (intervalId) clearInterval(intervalId);
+  });
+
+  const currentState = () => states[currentIndex()];
+
+  return (
+    <div class="flex flex-col items-center w-full">
+      <div
+        class="relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 ease-out w-12"
+        style={{
+          "background-color": currentState().color,
+          transform: isAnimating() ? "scale(0.92)" : "scale(1)",
+          opacity: isAnimating() ? "0.7" : "1"
+        }}
+      >
+        <div class="py-3 px-2 flex flex-col items-center gap-2">
+          {/* Animated Icon */}
+          <div
+            class="transition-all duration-300"
+            style={{
+              color: currentState().textColor,
+              transform: isAnimating() ? "rotate(90deg) scale(0.7)" : "rotate(0deg) scale(1)"
+            }}
+          >
+            {currentState().icon()}
+          </div>
+
+          {/* Vertical Text Content */}
+          <div
+            class="flex flex-col items-center gap-0.5 transition-all duration-300"
+            style={{
+              transform: isAnimating() ? "translateY(-5px)" : "translateY(0)",
+              opacity: isAnimating() ? "0" : "1"
+            }}
+          >
+            {/* Line 1 - Vertical */}
+            <div class="flex flex-col items-center">
+              {currentState().line1.split('').map((char: string) => (
+                <span
+                  class="text-[9px] font-bold leading-tight"
+                  style={{ color: currentState().textColor }}
+                >
+                  {char}
+                </span>
+              ))}
+            </div>
+            
+            {/* Separator Dot */}
+            <div
+              class="w-1 h-1 rounded-full my-0.5"
+              style={{ "background-color": currentState().textColor, opacity: "0.5" }}
+            />
+            
+            {/* Line 2 - Vertical */}
+            <div class="flex flex-col items-center">
+              {currentState().line2.split('').map((char: string) => (
+                <span
+                  class="text-[9px] font-medium leading-tight"
+                  style={{ color: currentState().textColor }}
+                >
+                  {char}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Pulse Animation for Call */}
+          <Show when={currentState().type === "call"}>
+            <div class="mt-1">
+              <div
+                class="w-1.5 h-1.5 rounded-full animate-pulse"
+                style={{ "background-color": currentState().textColor }}
+              />
+            </div>
+          </Show>
+
+          {/* Music Bars Animation */}
+          <Show when={currentState().type === "music"}>
+            <div class="flex items-end gap-0.5 h-3 mt-1">
+              <div
+                class="w-0.5 bg-white rounded-full animate-pulse"
+                style={{ height: "60%", "animation-delay": "0ms" }}
+              />
+              <div
+                class="w-0.5 bg-white rounded-full animate-pulse"
+                style={{ height: "100%", "animation-delay": "150ms" }}
+              />
+              <div
+                class="w-0.5 bg-white rounded-full animate-pulse"
+                style={{ height: "40%", "animation-delay": "300ms" }}
+              />
+            </div>
+          </Show>
+        </div>
+
+        {/* Shimmer Effect - Vertical */}
+        <div
+          class="absolute inset-0 opacity-20 pointer-events-none"
+          style={{
+            background: `linear-gradient(180deg, transparent, ${currentState().textColor}, transparent)`,
+            transform: isAnimating() ? "translateY(100%)" : "translateY(-100%)",
+            transition: "transform 0.6s ease-in-out"
+          }}
+        />
+      </div>
+    </div>
+  );
+}

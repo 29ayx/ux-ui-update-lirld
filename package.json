@@ -1,0 +1,44 @@
+{
+  "name": "example-with-tailwindcss",
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+  "dependencies": {
+    "@analytics/google-analytics": "^1.1.0",
+    "@faker-js/faker": "^10.1.0",
+    "@kobalte/core": "^0.13.11",
+    "@motionone/solid": "^10.16.4",
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "^0.15.0",
+    "@solidjs/start": "^1.1.0",
+    "analytics": "^0.8.19",
+    "browser-image-compression": "^2.0.2",
+    "cloudinary": "^2.8.0",
+    "compressorjs": "^1.2.1",
+    "firebase": "^12.6.0",
+    "i18n-iso-countries": "^7.14.0",
+    "isomorphic-dompurify": "^2.32.0",
+    "libphonenumber-js": "^1.12.26",
+    "livekit-client": "^2.16.0",
+    "livekit-server-sdk": "^2.14.2",
+    "react-icons": "^5.5.0",
+    "solid-icons": "^1.2.0",
+    "solid-js": "^1.9.5",
+    "vinxi": "^0.5.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.7",
+    "@vitest/ui": "^4.0.9",
+    "baseline-browser-mapping": "^2.9.19",
+    "firebase-admin": "^13.6.0",
+    "knip": "^6.6.3",
+    "tailwindcss": "^4.0.7",
+    "vitest": "^4.0.9"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

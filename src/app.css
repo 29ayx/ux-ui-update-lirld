@@ -1,0 +1,574 @@
+@import "tailwindcss";
+
+:root {
+  --background-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0;
+
+  /* 2025 Color System - Semantic Tokens (Policy #12) */
+  --c-flirt: #FF6B6B;
+  --c-calm: #4DABF7;
+  --c-reward: #FFD93D;
+  --c-alert: #FF375F;
+
+  /* Emotional Valence Layers (Policy #4) */
+  --c-warm-base: #FF6B6B;
+  --c-warm-light: #FFB3B3;
+  --c-cool-base: #4DABF7;
+  --c-cool-light: #A0CFFF;
+
+  /* Status Hues (Policy #13) */
+  --c-online: #4CAF50;
+  --c-typing: #4DABF7;
+  --c-away: #9E9E9E;
+
+  /* Error & Warning (Policy #15) */
+  --c-error: #D32F2F;
+  --c-warning: #FF9800;
+
+  /* Light Mode - Neutral Layer (Policy #4) */
+  --c-neutral-bg: #F5F5F5;
+  --c-neutral-card: #FAFAFA;
+  --c-neutral-elevated: #FFFFFF;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-rgb: 0, 0, 0;
+    --foreground-rgb: 255, 255, 255;
+
+    /* Dark Mode Depth (Policy #9) */
+    --c-neutral-bg: #121212;
+    --c-neutral-card: #1E1E1E;
+    --c-neutral-elevated: #252525;
+  }
+}
+
+body {
+  background: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth Animations for Glassmorphism UI */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-top {
+  from {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-8px);
+  }
+
+  75% {
+    transform: translateX(8px);
+  }
+}
+
+.animate-in {
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+.slide-in-from-bottom-4 {
+  animation: slide-in-from-bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-in-from-top-2 {
+  animation: slide-in-from-top 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Springy button animation */
+@keyframes spring {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Smooth transitions for glassmorphic elements */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(102, 204, 255, 0.2);
+}
+
+@keyframes fill {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.progress-fill {
+  animation: fill 5s linear;
+}
+
+/* Room Animation Effects */
+.sparkle-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 6px white, 0 0 12px white;
+  animation: sparkle-float 4s ease-in-out infinite;
+}
+
+@keyframes sparkle-float {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1);
+  }
+}
+
+.stars-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: star-twinkle 3s ease-in-out infinite;
+}
+
+@keyframes star-twinkle {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.hearts-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  font-size: 1.2rem;
+  animation: heart-float 4s ease-in-out infinite;
+}
+
+@keyframes heart-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-30px) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) scale(0.8);
+  }
+}
+
+.particles-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: particle-float 3s ease-in-out infinite;
+}
+
+@keyframes particle-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-40px) translateX(20px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) translateX(-20px);
+  }
+}
+
+.rainbow-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.rainbow-wave {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg,
+      #ff0000,
+      #ff7f00,
+      #ffff00,
+      #00ff00,
+      #0000ff,
+      #4b0082,
+      #9400d3,
+      #ff0000);
+  background-size: 400% 400%;
+  opacity: 0.2;
+  animation: rainbow-wave 5s ease infinite;
+}
+
+@keyframes rainbow-wave {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Host Earnings Feature Animations */
+@keyframes slide-in-from-top-4 {
+  from {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-right-4 {
+  from {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-top-1 {
+  from {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-from-top-4 {
+  animation: slide-in-from-top-4 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-in-from-right-4 {
+  animation: slide-in-from-right-4 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-in-from-top-1 {
+  animation: slide-in-from-top-1 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.duration-150 {
+  animation-duration: 150ms;
+}
+
+.duration-200 {
+  animation-duration: 200ms;
+}
+
+.duration-300 {
+  animation-duration: 300ms;
+}
+
+/* Touch-friendly button sizing */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth gradient transitions */
+.gradient-transition {
+  transition: background-position 0.3s ease;
+  background-size: 200% 200%;
+}
+
+.gradient-transition:hover {
+  background-position: right center;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for inputs and buttons that handle their own focus styles */
+input:focus-visible,
+button:focus-visible {
+  outline: none;
+}
+
+/* iOS-specific: Remove tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+
+  .bg-gradient-to-br,
+  .bg-gradient-to-r {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Host Promo Card Animations */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes bounce-slow {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+/* Home Engagement Features Animations */
+
+/* Badge pulse animation for notification badges */
+@keyframes badge-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+.badge-pulse {
+  animation: badge-pulse 0.8s ease-in-out infinite;
+}
+
+/* Heart fill animation for chat button interaction */
+@keyframes heart-fill {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1.0);
+    opacity: 1;
+  }
+}
+
+.heart-fill {
+  animation: heart-fill 0.2s ease-out;
+}
+
+/* Gradient shift animation for priority card borders */
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.gradient-shift {
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Gradient border animation for priority cards */
+.gradient-border-animated {
+  background: linear-gradient(45deg, #FF2D55, #FF6B9D, #C026D3, #7C3AED, #FF2D55);
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Pulse dot animation for social proof counter */
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Ensure animations respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+  .badge-pulse,
+  .heart-fill,
+  .gradient-shift,
+  .pulse-dot {
+    animation: none !important;
+  }
+}

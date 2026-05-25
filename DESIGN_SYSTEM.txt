@@ -1,0 +1,94 @@
+LIRLD DESIGN SYSTEM & UI DOCUMENTATION
+=======================================
+Version: 1.0 (2026-05-02)
+
+1. CORE DESIGN PRINCIPLES
+-------------------------
+* Glassmorphism: Heavy use of backdrop-blur (xl/20px) and translucent backgrounds.
+* Responsive Inversion: Selection states flip between light and dark depending on the surface.
+* Emotional Resonance: Using "Warm" (Pink/Red) for actions and "Cool" (Navy/Blue) for structure.
+* Mobile-First: All layouts are built for one-handed reachability (thumb zones).
+
+2. COLOR PALETTE
+----------------
+BRAND PRIMARY:
+- Navy Core      : #010B80 (Main brand color)
+- Highlight Blue : #2563EB (blue-600)
+- Sidebar Navy   : #05073C (Slightly darker, used for the left desktop sidebar)
+
+SURFACES:
+- Light Mode BG  : #F0F3FF (Main) / #F5F5F5 (Neutral)
+- Light Mode Card: #FFFFFF
+- Dark Mode BG   : #000000 (OLED Black) / #121212 (Neutral)
+- Dark Mode Card : #1E1E1E
+
+
+STATUS HUES:
+- Online         : #4CAF50
+- Alert/Notify   : #FF375F
+- Error          : #D32F2F
+
+3. LAYOUT STRUCTURE & RESPONSIVENESS
+------------------------------------
+The application follows a dual-navigation layout pattern to maximize accessibility.
+
+MOBILE (<1024px):
+- Left Sidebar   : HIDDEN
+- Right Nav Strip: 48px (w-12) - Fixed Right
+- Main Content   : w-full, padding-right: 48px (pr-12)
+- Bottom Padding : 32px (pb-8) for safe areas
+
+DESKTOP (>=1024px):
+- Left Sidebar   : 288px (w-72) - Fixed Left
+- Right Nav Strip: 64px (w-16) - Fixed Right
+- Main Content   : margin-left: 288px (lg:ml-72), padding-right: 64px (pr-16)
+- Max Width      : Center content expands to fill available space between bars.
+
+4. COMPONENT STANDARDS
+----------------------
+SIDEBAR (LEFT - DESKTOP ONLY):
+- Surface        : bg-[#05073C] with backdrop-blur-xl
+- Item Inactive  : text-white/80, hover:bg-white/10
+- Item Active    : bg-white, text-[#010b80], shadow-md, rounded-2xl
+- Width          : 288px (w-72)
+
+NAV STRIP (RIGHT - GLOBAL):
+- Surface        : bg-white/80 (Light) / bg-black/80 (Dark) + backdrop-blur-xl
+- Border         : border-l border-black/20 (Light) / border-white/20 (Dark)
+- Item Size      : 40x40px (Mobile) / 60x60px (Desktop)
+- Item Active    : bg-black/20 (Light) / bg-white/20 (Dark)
+
+PAGE HEADER:
+- Sticky         : top-0, z-50
+- Height         : ~72px (py-5)
+- Padding        : px-4 (Mobile) / px-8 (Desktop)
+- Glass Effect   : bg-white/80 or bg-zinc-950/80 + backdrop-blur-xl
+- Title          : text-2xl, font-bold, tracking-tight
+
+INTERACTIVE ELEMENTS:
+- Touch Targets  : Minimum 48x48px
+- Input Fields   : Rounded-2xl, py-2.5, px-4, bg-gray-100/50
+- Buttons        : Outlined (border-2) when inactive/disabled, Solid Blue (#2563EB) when active. Springy animation (scale 1.05 on hover/tap).
+
+5. TYPOGRAPHY
+-------------
+- Primary Sans   : System Sans (Inter/Roboto)
+- Brand Title    : text-3xl, font-black, tracking-tighter (Sidebar)
+- Page Titles    : text-2xl, font-bold
+- Body Text      : text-[15px] (Medium) / text-sm (Regular)
+- Captions       : text-[10px], font-bold, uppercase, tracking-[0.2em]
+
+6. ANIMATIONS & EFFECTS
+-----------------------
+- Transitions    : 200ms ease-in-out (Standard) / 500ms (Color shifts)
+- Entry          : animate-in fade-in slide-in-from-bottom-4 (Standard for sections)
+- Shimmer        : Used for loading states and high-priority cards
+- Pulse          : Used for notification badges and online indicators
+
+7. CONSISTENCY RULES (MANDATORY)
+--------------------------------
+1. ICONS         : Use 'solid-icons/io' or 'solid-icons/fa' ONLY. Do not mix.
+2. BORDERS       : Use 50% opacity on borders (e.g., border-gray-200/50).
+3. ROUNDING      : Standard rounding is 'rounded-2xl' for cards/inputs.
+4. SPACING       : Follow an 8px grid (4, 8, 16, 24, 32, 64).
+5. DARK MODE     : Always implement 'dark:' classes using OLED black (#000) for backgrounds.

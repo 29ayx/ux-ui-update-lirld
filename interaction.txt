@@ -1,0 +1,20 @@
+11**Notification Pulse**Subtle badge animation + micro-vibration on nav icon.Triggers FOMO → instant message check.≥1 badge update every 5 min during peak hours.  
+12**Endless Feed Momentum**Auto-load next card with 0.3 s inertia scroll.Keeps thumb moving → habitual swipe loop.Vertical momentum ≥150 % viewport height.  
+13**Gamified Streaks**Daily login streak counter with flame icon in profile tab.Rewards consistency → daily return visits.Streak badge size = 1.6× day count (golden ratio).  
+14**Micro-Interactions**Heart fill animation (0.2 s) + haptic tap on like.Rewards action → dopamine hit.Every CTA triggers ≤0.3 s feedback.  
+15**Curiosity Gap Teaser**Profile preview shows “3 mutual interests…” with blurred rest.Entices tap to reveal → deeper engagement.Blur radius = 8 dp; teaser text ≤30 % of card height.  
+16**Social Proof Ribbon**Live counter “247 people viewing now” on discover page.Creates urgency → faster profile swipe.Counter height = 4 dp grid × 5; update every 10 s.  
+17**One-Hand Scroll Anchor**Sticky bottom nav + floating “Back to Top” in thumb zone.Keeps navigation reachable → reduces frustration.Anchor button ≥48 dp in bottom 20 % of screen.  
+18**Color Dopamine Triggers**Gradient shift on match screen (pink → gold in 0.5 s).Signals reward → emotional bookmark.Gradient angle = 45°; transition ease-out.  
+19**Partial Progress Nudge**Onboarding carousel at 70 % shows “Almost there!” with confetti.Keeps user in flow → completion rate boost.Progress bar fill = 1.6× remaining steps.  
+20**Reciprocity Loop**First message auto-suggests 3 ice-breakers after mutual like.Lowers barrier → higher reply rate.Suggestions ≤60 % of input field width.  
+21**Scarcity Timer**“Boost expires in 2 h 13 m” badge on profile tab.Drives immediate action → paid conversion.Timer font weight = 600; badge contrast ≥4.5:1.  
+22**Personalized Peek**Home feed top card: “Alex waved at you 5 min ago” with half-face reveal.Pulls user in → instant interaction.Card aspect ratio 1:1.6 (portrait golden).  
+23**Thumb-Safe Overscroll**Elastic pull-to-refresh with match preview at 150 % stretch.Rewards gesture → discovery delight.Overscroll preview opacity = 0 → 1 over 100 dp.  
+24**Cognitive Closure Hooks**Incomplete profile ring (75 % filled) pulses in nav drawer.Urges completion → data richness.Ring stroke = 4 dp; pulse every 8 s.  
+25**Spatial Memory Anchors**Message tab icon morphs into sender avatar on new chat.Keeps context → faster re-engagement.Avatar size = 1.6× default icon scale.  
+26**Contrast Pop for CTAs**Primary button uses #FF2D55 on #FFFFFF (5.2:1).Grabs attention in <0.5 s → tap rate lift.Button corner radius = 8 dp grid × 3.  
+27**Rhythm Grid Lock**All vertical spacing multiples of 4 dp.Establishes visual beat → calm scanning.4 dp baseline; section gaps = 4× / 8×.  
+28**Eye-Catch Micro-Copy**Floating label “Say something clever…” in message field.Prompts action → reduces blank-page syndrome.Label animates in at 0.1 s on focus.  
+29**Layered Depth Cues**Cards cast 2 dp shadow; active card lifts to 8 dp.Separates foreground → intuitive hierarchy.Elevation transition ≤0.2 s.  
+30**Adaptive Thumb Heatmap**High-frequency actions migrate to bottom 40 % over sessions.Learns user → zero-stretch taps.Heatmap recalculates every 50 interactions.

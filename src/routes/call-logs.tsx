@@ -2,12 +2,14 @@ import { createSignal, createMemo, onMount, onCleanup, Show } from 'solid-js';
 import { useAuth } from '~/lib/auth';
 import { subscribeToCallLogs, type CallLog } from '~/lib/callLogs';
 import { initiateCall } from '~/lib/calls';
+import CallLogsStats from '~/components/call/CallStats';
 import CallLogsHeader from '~/components/call/CallLogsHeader';
 import CallLogsFilters from '~/components/call/CallLogsFilters';
 import CallLogsList from '~/components/call/CallLogsList';
 import EmptyState from '~/components/call/EmptyState';
 import LoadingState from '~/components/home/LoadingState';
 import BalanceErrorModal from '~/components/BalanceErrorModal';
+import CallLogsBottomBanner from '~/components/call/CallLogsBottomBanner';
 
 export default function CallLogsPage() {
   const { user } = useAuth();
@@ -106,8 +108,19 @@ export default function CallLogsPage() {
             activeFilter={activeFilter()}
             onFilterChange={setActiveFilter}
           />
-        </div>
+          <div class='mb-7'>
 
+         
+            <CallLogsStats
+    totalCount={logs().length}
+    missedCount={logs().filter(log => log.status === 'missed').length}
+    incomingCount={logs().filter(log => log.direction === 'incoming').length}
+    outgoingCount={logs().filter(log => log.direction === 'outgoing').length}
+    onFilterChange={setActiveFilter}
+  />
+   </div>
+</div>
+       
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Show when={!loading()} fallback={<LoadingState />}>
             <Show when={filteredLogs().length > 0} fallback={<EmptyState filter={activeFilter()} />}>
@@ -118,6 +131,7 @@ export default function CallLogsPage() {
               />
             </Show>
           </Show>
+          <CallLogsBottomBanner />
         </div>
 
         {/* Balance Error Modal */}

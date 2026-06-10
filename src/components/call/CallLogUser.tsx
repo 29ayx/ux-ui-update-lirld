@@ -6,9 +6,10 @@ interface CallLogUserProps {
     userId: string;
     fallbackName?: string;
     className?: string;
+       formattedTimestamp?: () => string;
 }
 
-const fetchUserData = async (userId: string) => {
+const fetchUserData = async (userId: string,) => {
     if (!userId) return null;
     try {
         const userDoc = await getDoc(doc(db, 'users', userId));
@@ -66,11 +67,21 @@ export default function CallLogUser(props: CallLogUserProps) {
             </a>
 
             {/* User Name */}
+            <div class="flex flex-col min-w-0">
             <h3 class="text-sm sm:text-base text-slate-800 dark:text-slate-100 font-semibold truncate">
                 <Show when={!userData.loading} fallback={<span class="inline-block w-24 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />}>
                     {userData()?.name || props.fallbackName || 'Unknown User'}
+                  
                 </Show>
+
+                  
             </h3>
+                <span class="text-xs text-slate-500 dark:text-slate-400">
+    {props.formattedTimestamp?.()}
+  </span>
+            </div>
+              
+
         </div>
     );
 }

@@ -3,7 +3,7 @@ import { HiSolidPhone } from 'solid-icons/hi';
 import type { CallLog } from '~/lib/callLogs';
 import LoadingSpinner from '../LoadingSpinner';
 import CallLogUser from './CallLogUser';
-
+import { BsThreeDotsVertical } from 'solid-icons/bs'
 interface CallLogItemProps {
   log: CallLog;
   onCall: (userId: string) => void;
@@ -47,6 +47,7 @@ export default function CallLogItem(props: CallLogItemProps) {
       return callTime.toLocaleDateString();
     }
   });
+ 
 
   // Use createMemo for status-dependent values to prevent recalculation
   const statusColor = createMemo(() => {
@@ -80,10 +81,10 @@ export default function CallLogItem(props: CallLogItemProps) {
   return (
     <div class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white dark:bg-black rounded-xl shadow-sm hover:shadow-sm dark:hover:bg-[#172554] transition-colors dark:border-[1px] dark:border-gray-900">
       {/* Call Info */}
-      <div class="flex-1 min-w-0 flex items-center gap-3">
-        <CallLogUser userId={props.log.otherUserId} fallbackName="Unknown User" />
-
-        <div class="flex flex-col">
+      <div class="flex-1 min-w-0 flex  flex-row  gap-3">
+        <CallLogUser userId={props.log.otherUserId} fallbackName="Unknown User"   formattedTimestamp={formattedTimestamp}/>
+     
+        <div class="flex flex-col py-2">
           <div class="flex items-center gap-2">
             <span class={`text-xs sm:text-sm ${statusColor()} flex items-center gap-1`}>
               <DirectionIcon />
@@ -91,10 +92,10 @@ export default function CallLogItem(props: CallLogItemProps) {
             </span>
           </div>
           <div class="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 flex-wrap">
-            <span>{formattedTimestamp()}</span>
+          
             <Show when={props.log.status === 'completed'}>
               <span>•</span>
-              <span>{formattedDuration()}</span>
+           
             </Show>
             <Show when={props.log.isFree}>
               <span>•</span>
@@ -105,7 +106,9 @@ export default function CallLogItem(props: CallLogItemProps) {
       </div>
 
       {/* Call Button */}
-      <button
+      <div class='flex flex-row items-center gap-[16px]'>
+           <span>{formattedDuration()}</span>
+            <button
         onClick={() => props.onCall(props.log.otherUserId)}
         disabled={props.isInitiating}
         class="w-11 h-11 rounded-full bg-[#b2f2bb] dark:bg-[#134e4a] hover:bg-[#a3e8b0] dark:hover:bg-[#0f3a38] text-green-900 dark:text-teal-300 flex items-center justify-center transition-all active:scale-95 disabled:opacity-50 flex-shrink-0 touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400 dark:focus-visible:ring-teal-400 focus-visible:ring-offset-2"
@@ -115,6 +118,11 @@ export default function CallLogItem(props: CallLogItemProps) {
           <LoadingSpinner size="sm" color="text-green-900 dark:text-teal-300" />
         </Show>
       </button>
+        <BsThreeDotsVertical class='w-6 h-6'/>
+      </div>
+      
+    
+     
     </div>
   );
 }

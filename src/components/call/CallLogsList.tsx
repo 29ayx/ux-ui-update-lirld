@@ -11,6 +11,17 @@ interface CallLogsListProps {
 export default function CallLogsList(props: CallLogsListProps) {
   return (
     <div class="space-y-3">
+      <div class='flex justify-between'>
+       
+      <h5 class='font-[700]'>
+        Recent Calls
+      </h5>
+ <span>
+  {props.logs.length > 1
+    ? `${props.logs.length} Calls`
+    : `${props.logs.length} Call`}
+</span>
+       </div>
       <For each={props.logs}>
         {(log) => (
           <CallLogItem
